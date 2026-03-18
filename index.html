@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yash Kapate</title>
+
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ff9933, #000);
+    color: white;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+/* HERO */
+.hero {
+    padding: 50px 20px;
+}
+
+.hero img {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 4px solid #ff9933;
+    animation: float 3s infinite ease-in-out;
+}
+
+.hero h1 {
+    margin-top: 15px;
+    font-size: 32px;
+}
+
+.typing {
+    color: #ffcc66;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* CARDS */
+.card {
+    background: rgba(255,255,255,0.1);
+    margin: 20px auto;
+    padding: 20px;
+    width: 85%;
+    border-radius: 15px;
+    backdrop-filter: blur(12px);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+/* BUTTONS */
+.button {
+    display:inline-block;
+    margin:10px;
+    padding:12px 20px;
+    border-radius:8px;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.insta { background:#E1306C; }
+.whatsapp { background:#25D366; }
+
+/* DARK MODE */
+.dark {
+    background:#111;
+}
+
+/* TOGGLE */
+.toggle {
+    position:fixed;
+    top:15px;
+    right:15px;
+    background:white;
+    color:black;
+    padding:8px 12px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+/* ANIMATIONS */
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+/* FADE IN */
+.fade {
+    opacity:0;
+    transform:translateY(30px);
+    transition:1s;
+}
+
+.fade.show {
+    opacity:1;
+    transform:translateY(0);
+}
+
+footer {
+    margin:20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="toggle" onclick="toggleMode()">🌙</div>
+
+<!-- HERO -->
+<div class="hero">
+    <img src="profile.jpg" alt="Profile">
+    <h1>Yash Kapate</h1>
+    <div class="typing" id="typing"></div>
+</div>
+
+<!-- ABOUT -->
+<div class="card fade">
+    <h2>About Me</h2>
+    <p>I am passionate about technology, creativity and building cool things.</p>
+</div>
+
+<!-- SKILLS -->
+<div class="card fade">
+    <h2>Skills</h2>
+    <p>HTML | CSS | Basic Coding</p>
+</div>
+
+<!-- CONTACT -->
+<div class="card fade">
+    <h2>Contact</h2>
+    <p>📞 7972599723</p>
+
+    <a class="button insta" href="https://www.instagram.com/yash__kapate_4218" target="_blank">
+        Instagram
+    </a>
+
+    <a class="button whatsapp" href="https://wa.me/917972599723" target="_blank">
+        WhatsApp
+    </a>
+</div>
+
+<footer>© 2026 Yash Kapate</footer>
+
+<script>
+// DARK MODE
+function toggleMode(){
+    document.body.classList.toggle("dark");
+}
+
+// TYPING EFFECT
+const text = ["Web Learner", "Creative Mind", "Future Developer 🔥"];
+let i=0, j=0;
+let currentText = "";
+let isDeleting = false;
+
+function type(){
+    currentText = text[i];
+    
+    if(!isDeleting){
+        document.getElementById("typing").innerHTML = currentText.substring(0,j++);
+    } else {
+        document.getElementById("typing").innerHTML = currentText.substring(0,j--);
+    }
+
+    if(j == currentText.length) isDeleting = true;
+    if(j == 0){
+        isDeleting = false;
+        i = (i+1) % text.length;
+    }
+
+    setTimeout(type,100);
+}
+type();
+
+// SCROLL ANIMATION
+const faders = document.querySelectorAll('.fade');
+
+window.addEventListener('scroll', () => {
+    faders.forEach(el => {
+        const top = el.getBoundingClientRect().top;
+        if(top < window.innerHeight - 50){
+            el.classList.add('show');
+        }
+    });
+});
+</script>
+
+</body>
+</html>
